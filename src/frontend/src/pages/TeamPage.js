@@ -12,7 +12,7 @@ export const TeamPage = () => {
         () => {
             const fetchTeam = async () => {
                 // Chennai%20Super%20Kings
-                const response = await fetch(`http://localhost:8080/team/${teamName}`)
+                const response = await fetch(`${process.env.REACT_APP_API_ROOT_URL}/team/${teamName}`)
                 const data = await response.json();
                 setTeam(data);
                 console.log(data)
@@ -43,7 +43,7 @@ export const TeamPage = () => {
             {team.matches.slice(1).map(match => <MatchSmallCard match={match} key={match.id} teamName={team.teamName} />)}
             <div className="more-link">
                 <Link to ={`/teams/${teamName}/matches/${process.env.REACT_APP_DATA_END_YEAR}`}>
-                    <a href="#">{`More >`}</a>
+                    {`More >`}
                 </Link>
             </div>
 

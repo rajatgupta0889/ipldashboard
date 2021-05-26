@@ -1,16 +1,13 @@
 import { React, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import {Link} from 'react-router-dom'
 import { TeamTile } from '../components/TeamTile';
 import './HomePage.scss';
 export const HomePage = () => {
     const [teams, setTeams] = useState([]);
-    const { teamName } = useParams();
     useEffect(
         () => {
             const fetchAllTeams = async () => {
                 // Chennai%20Super%20Kings
-                const response = await fetch(`http://localhost:8080/team`)
+                const response = await fetch(`${process.env.REACT_APP_API_ROOT_URL}/team`)
                 const data = await response.json();
                 setTeams(data);
                 console.log(data)
@@ -24,7 +21,7 @@ export const HomePage = () => {
                 <h1 className="app-name"> IPL Dashboard </h1>
             </div>
             <div className="team-grid">
-                {teams.map(team => <TeamTile teamName={team.teamName}/>)}
+                {teams.map(team => <TeamTile teamName={team.teamName} key={team.id}/>)}
             </div>
         </div>
     );
